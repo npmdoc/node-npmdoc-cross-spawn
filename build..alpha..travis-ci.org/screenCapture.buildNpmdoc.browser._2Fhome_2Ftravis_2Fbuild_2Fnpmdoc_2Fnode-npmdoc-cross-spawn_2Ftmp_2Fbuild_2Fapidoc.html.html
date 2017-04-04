@@ -1,0 +1,426 @@
+<html><head></head><body><div class="apidocDiv">
+<style>
+/*csslint
+*/
+.apidocDiv {
+    background: #fff;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.apidocDiv a[href] {
+    color: #33f;
+    font-weight: bold;
+    text-decoration: none;
+}
+.apidocDiv a[href]:hover {
+    text-decoration: underline;
+}
+.apidocCodeCommentSpan {
+    background: #bbf;
+    color: #000;
+    display: block;
+}
+.apidocCodeKeywordSpan {
+    color: #d00;
+    font-weight: bold;
+}
+.apidocCodePre {
+    background: #eef;
+    border: 1px solid;
+    color: #777;
+    padding: 5px;
+    white-space: pre-wrap;
+}
+.apidocFooterDiv {
+    margin-top: 20px;
+    text-align: center;
+}
+.apidocModuleLi {
+    margin-top: 10px;
+}
+.apidocSectionDiv {
+    border-top: 1px solid;
+    margin-top: 20px;
+}
+.apidocSignatureSpan {
+    color: #777;
+    font-weight: bold;
+}
+</style>
+<h1>api documentation for
+    <a href="https://github.com/IndigoUnited/node-cross-spawn#readme">cross-spawn (v5.1.0)</a>
+</h1>
+<h4>Cross platform child_process#spawn and child_process#spawnSync</h4>
+<div class="apidocSectionDiv"><a href="#apidoc.tableOfContents" id="apidoc.tableOfContents"><h1>table of contents</h1></a><ol>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.cross-spawn">module cross-spawn</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.cross-spawn._parse">
+            function <span class="apidocSignatureSpan">cross-spawn.</span>_parse
+            <span class="apidocSignatureSpan">(command, args, options)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.cross-spawn.spawn">
+            function <span class="apidocSignatureSpan">cross-spawn.</span>spawn
+            <span class="apidocSignatureSpan">(command, args, options)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.cross-spawn.sync">
+            function <span class="apidocSignatureSpan">cross-spawn.</span>sync
+            <span class="apidocSignatureSpan">(command, args, options)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">object <span class="apidocSignatureSpan">cross-spawn.</span>_enoent</span>
+
+        </li>
+
+    </ol></li>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.cross-spawn._enoent">module cross-spawn._enoent</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.cross-spawn._enoent.hookChildProcess">
+            function <span class="apidocSignatureSpan">cross-spawn._enoent.</span>hookChildProcess
+            <span class="apidocSignatureSpan">(cp, parsed)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.cross-spawn._enoent.notFoundError">
+            function <span class="apidocSignatureSpan">cross-spawn._enoent.</span>notFoundError
+            <span class="apidocSignatureSpan">(command, syscall)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.cross-spawn._enoent.verifyENOENT">
+            function <span class="apidocSignatureSpan">cross-spawn._enoent.</span>verifyENOENT
+            <span class="apidocSignatureSpan">(status, parsed)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.cross-spawn._enoent.verifyENOENTSync">
+            function <span class="apidocSignatureSpan">cross-spawn._enoent.</span>verifyENOENTSync
+            <span class="apidocSignatureSpan">(status, parsed)</span>
+            </a>
+
+        </li>
+
+    </ol></li>
+
+</ol></div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.cross-spawn" id="apidoc.module.cross-spawn">module cross-spawn</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.cross-spawn._parse" id="apidoc.element.cross-spawn._parse">
+        function <span class="apidocSignatureSpan">cross-spawn.</span>_parse
+        <span class="apidocSignatureSpan">(command, args, options)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function parse(command, args, options) {
+    var parsed;
+
+    // Normalize arguments, similar to nodejs
+    if (args &amp;&amp; !Array.isArray(args)) {
+        options = args;
+        args = null;
+    }
+
+    args = args ? args.slice(0) : [];  // Clone array to avoid changing the original
+    options = options || {};
+
+    // Build our parsed object
+    parsed = {
+        command: command,
+        args: args,
+        options: options,
+        file: undefined,
+        original: command,
+    };
+
+    // Delegate further parsing to shell or non-shell
+    return options.shell ? parseShell(parsed) : parseNonShell(parsed);
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.cross-spawn.spawn" id="apidoc.element.cross-spawn.spawn">
+        function <span class="apidocSignatureSpan">cross-spawn.</span>spawn
+        <span class="apidocSignatureSpan">(command, args, options)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function spawn(command, args, options) {
+    var parsed;
+    var spawned;
+
+    // Parse the arguments
+    parsed = parse(command, args, options);
+
+    // Spawn the child process
+    spawned = cp.spawn(parsed.command, parsed.args, parsed.options);
+
+    // Hook into child process "exit" event to emit an error if the command
+    // does not exists, see: https://github.com/IndigoUnited/node-cross-spawn/issues/16
+    enoent.hookChildProcess(spawned, parsed);
+
+    return spawned;
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+    var parsed;
+    var spawned;
+
+    // Parse the arguments
+    parsed = parse(command, args, options);
+
+    // Spawn the child process
+    spawned = cp.<span class="apidocCodeKeywordSpan">spawn</span>(parsed.command, parsed.args, parsed.options);
+
+    // Hook into child process "exit" event to emit an error if the command
+    // does not exists, see: https://github.com/IndigoUnited/node-cross-spawn/issues/16
+    enoent.hookChildProcess(spawned, parsed);
+
+    return spawned;
+}
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.cross-spawn.sync" id="apidoc.element.cross-spawn.sync">
+        function <span class="apidocSignatureSpan">cross-spawn.</span>sync
+        <span class="apidocSignatureSpan">(command, args, options)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function spawnSync(command, args, options) {
+    var parsed;
+    var result;
+
+    if (!cpSpawnSync) {
+        try {
+            cpSpawnSync = require('spawn-sync');  // eslint-disable-line global-require
+        } catch (ex) {
+            throw new Error(
+                'In order to use spawnSync on node 0.10 or older, you must ' +
+                'install spawn-sync:\n\n' +
+                '  npm install spawn-sync --save'
+            );
+        }
+    }
+
+    // Parse the arguments
+    parsed = parse(command, args, options);
+
+    // Spawn the child process
+    result = cpSpawnSync(parsed.command, parsed.args, parsed.options);
+
+    // Analyze if the command does not exists, see: https://github.com/IndigoUnited/node-cross-spawn/issues/16
+    result.error = result.error || enoent.verifyENOENTSync(result.status, parsed);
+
+    return result;
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+```js
+var spawn = require('cross-spawn');
+
+// Spawn NPM asynchronously
+var child = spawn('npm', ['list', '-g', '-depth', '0'], { stdio: 'inherit
+' });
+
+// Spawn NPM synchronously
+var results = spawn.<span class="apidocCodeKeywordSpan">sync</span>('npm', ['list', '-g', '-depth
+', '0'], { stdio: 'inherit' });
+```
+
+
+## Caveats
+
+#### `options.shell` as an alternative to `cross-spawn`
+...</pre></li>
+    </ul>
+
+
+
+
+</div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.cross-spawn._enoent" id="apidoc.module.cross-spawn._enoent">module cross-spawn._enoent</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.cross-spawn._enoent.hookChildProcess" id="apidoc.element.cross-spawn._enoent.hookChildProcess">
+        function <span class="apidocSignatureSpan">cross-spawn._enoent.</span>hookChildProcess
+        <span class="apidocSignatureSpan">(cp, parsed)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function hookChildProcess(cp, parsed) {
+    var originalEmit;
+
+    if (!isWin) {
+        return;
+    }
+
+    originalEmit = cp.emit;
+    cp.emit = function (name, arg1) {
+        var err;
+
+        // If emitting "exit" event and exit code is 1, we need to check if
+        // the command exists and emit an "error" instead
+        // See: https://github.com/IndigoUnited/node-cross-spawn/issues/16
+        if (name === 'exit') {
+            err = verifyENOENT(arg1, parsed, 'spawn');
+
+            if (err) {
+                return originalEmit.call(cp, 'error', err);
+            }
+        }
+
+        return originalEmit.apply(cp, arguments);
+    };
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+parsed = parse(command, args, options);
+
+// Spawn the child process
+spawned = cp.spawn(parsed.command, parsed.args, parsed.options);
+
+// Hook into child process "exit" event to emit an error if the command
+// does not exists, see: https://github.com/IndigoUnited/node-cross-spawn/issues/16
+enoent.<span class="apidocCodeKeywordSpan">hookChildProcess</span>(spawned, parsed);
+
+return spawned;
+}
+
+function spawnSync(command, args, options) {
+var parsed;
+var result;
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.cross-spawn._enoent.notFoundError" id="apidoc.element.cross-spawn._enoent.notFoundError">
+        function <span class="apidocSignatureSpan">cross-spawn._enoent.</span>notFoundError
+        <span class="apidocSignatureSpan">(command, syscall)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function notFoundError(command, syscall) {
+    var err;
+
+    err = new Error(syscall + ' ' + command + ' ENOENT');
+    err.code = err.errno = 'ENOENT';
+    err.syscall = syscall + ' ' + command;
+
+    return err;
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.cross-spawn._enoent.verifyENOENT" id="apidoc.element.cross-spawn._enoent.verifyENOENT">
+        function <span class="apidocSignatureSpan">cross-spawn._enoent.</span>verifyENOENT
+        <span class="apidocSignatureSpan">(status, parsed)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function verifyENOENT(status, parsed) {
+    if (isWin &amp;&amp; status === 1 &amp;&amp; !parsed.file) {
+        return notFoundError(parsed.original, 'spawn');
+    }
+
+    return null;
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.cross-spawn._enoent.verifyENOENTSync" id="apidoc.element.cross-spawn._enoent.verifyENOENTSync">
+        function <span class="apidocSignatureSpan">cross-spawn._enoent.</span>verifyENOENTSync
+        <span class="apidocSignatureSpan">(status, parsed)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function verifyENOENTSync(status, parsed) {
+    if (isWin &amp;&amp; status === 1 &amp;&amp; !parsed.file) {
+        return notFoundError(parsed.original, 'spawnSync');
+    }
+
+    // If we are in node 10, then we are using spawn-sync; if it exited
+    // with -1 it probably means that the command does not exist
+    if (isNode10 &amp;&amp; status === -1) {
+        parsed.file = isWin ? parsed.file : resolveCommand(parsed.original);
+
+        if (!parsed.file) {
+            return notFoundError(parsed.original, 'spawnSync');
+        }
+    }
+
+    return null;
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+    // Parse the arguments
+    parsed = parse(command, args, options);
+
+    // Spawn the child process
+    result = cpSpawnSync(parsed.command, parsed.args, parsed.options);
+
+    // Analyze if the command does not exists, see: https://github.com/IndigoUnited/node-cross-spawn/issues/16
+    result.error = result.error || enoent.<span class="apidocCodeKeywordSpan">verifyENOENTSync</span>(result.status, parsed);
+
+    return result;
+}
+
+module.exports = spawn;
+module.exports.spawn = spawn;
+module.exports.sync = spawnSync;
+...</pre></li>
+    </ul>
+
+
+</div>
+
+<div class="apidocFooterDiv">
+    [ this document was created with
+    <a href="https://github.com/kaizhu256/node-utility2" target="_blank">utility2</a>
+    ]
+</div>
+</div>
+</body></html>
