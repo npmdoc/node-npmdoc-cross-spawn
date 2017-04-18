@@ -1,13 +1,16 @@
-<svg height="158" width="720" xmlns="http://www.w3.org/2000/svg">
-<rect height="158" fill="#555" width="720"></rect>
+<svg height="206" width="720" xmlns="http://www.w3.org/2000/svg">
+<rect height="206" fill="#555" width="720"></rect>
 <text fill="#7f7" font-family="Courier New" font-size="12" xml:space="preserve">
-<tspan x="10" y="26">└─┬ cross-spawn@5.1.0 </tspan>
-<tspan x="10" y="42">  ├─┬ lru-cache@4.0.2 </tspan>
-<tspan x="10" y="58">  │ ├── pseudomap@1.0.2 </tspan>
-<tspan x="10" y="74">  │ └── yallist@2.1.2 </tspan>
-<tspan x="10" y="90">  ├─┬ shebang-command@1.2.0 </tspan>
-<tspan x="10" y="106">  │ └── shebang-regex@1.0.0 </tspan>
-<tspan x="10" y="122">  └─┬ which@1.2.14 </tspan>
-<tspan x="10" y="138">    └── isexe@2.0.0</tspan>
+<tspan x="10" y="26">1 megabytes installed</tspan>
+<tspan x="10" y="42"></tspan>
+<tspan x="10" y="58">node_modules</tspan>
+<tspan x="10" y="74">└─┬ cross-spawn@5.1.0 </tspan>
+<tspan x="10" y="90">  ├─┬ lru-cache@4.0.2 </tspan>
+<tspan x="10" y="106">  │ ├── pseudomap@1.0.2 </tspan>
+<tspan x="10" y="122">  │ └── yallist@2.1.2 </tspan>
+<tspan x="10" y="138">  ├─┬ shebang-command@1.2.0 </tspan>
+<tspan x="10" y="154">  │ └── shebang-regex@1.0.0 </tspan>
+<tspan x="10" y="170">  └─┬ which@1.2.14 </tspan>
+<tspan x="10" y="186">    └── isexe@2.0.0</tspan>
 </text>
 </svg>

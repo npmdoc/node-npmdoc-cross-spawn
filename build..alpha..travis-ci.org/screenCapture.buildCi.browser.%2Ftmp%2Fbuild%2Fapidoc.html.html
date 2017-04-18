@@ -1,4 +1,4 @@
-<div class="apidocDiv">
+<html><head></head><body><div class="apidocDiv">
 <style>
 /*csslint
 */
@@ -47,17 +47,10 @@
 }
 </style>
 <h1>api documentation for
-    <a
-
-        href="https://github.com/IndigoUnited/node-cross-spawn#readme"
-
-    >cross-spawn (v5.1.0)</a>
+    <a href="https://github.com/IndigoUnited/node-cross-spawn#readme">cross-spawn (v5.1.0)</a>
 </h1>
 <h4>Cross platform child_process#spawn and child_process#spawnSync</h4>
-<div class="apidocSectionDiv"><a
-    href="#apidoc.tableOfContents"
-    id="apidoc.tableOfContents"
-><h1>table of contents</h1></a><ol>
+<div class="apidocSectionDiv"><a href="#apidoc.tableOfContents" id="apidoc.tableOfContents"><h1>table of contents</h1></a><ol>
 
     <li class="apidocModuleLi"><a href="#apidoc.module.cross-spawn">module cross-spawn</a><ol>
 
@@ -304,7 +297,7 @@
     // Spawn the child process
     spawned = cp.spawn(parsed.command, parsed.args, parsed.options);
 
-    // Hook into child process &#x22;exit&#x22; event to emit an error if the command
+    // Hook into child process "exit" event to emit an error if the command
     // does not exists, see: https://github.com/IndigoUnited/node-cross-spawn/issues/16
     enoent.hookChildProcess(spawned, parsed);
 
@@ -333,14 +326,14 @@
     cp.emit = function (name, arg1) {
         var err;
 
-        // If emitting &#x22;exit&#x22; event and exit code is 1, we need to check if
-        // the command exists and emit an &#x22;error&#x22; instead
+        // If emitting "exit" event and exit code is 1, we need to check if
+        // the command exists and emit an "error" instead
         // See: https://github.com/IndigoUnited/node-cross-spawn/issues/16
-        if (name === &#x27;exit&#x27;) {
-            err = verifyENOENT(arg1, parsed, &#x27;spawn&#x27;);
+        if (name === 'exit') {
+            err = verifyENOENT(arg1, parsed, 'spawn');
 
             if (err) {
-                return originalEmit.call(cp, &#x27;error&#x27;, err);
+                return originalEmit.call(cp, 'error', err);
             }
         }
 
@@ -362,9 +355,9 @@
     <li>description and source-code<pre class="apidocCodePre">function notFoundError(command, syscall) {
     var err;
 
-    err = new Error(syscall + &#x27; &#x27; + command + &#x27; ENOENT&#x27;);
-    err.code = err.errno = &#x27;ENOENT&#x27;;
-    err.syscall = syscall + &#x27; &#x27; + command;
+    err = new Error(syscall + ' ' + command + ' ENOENT');
+    err.code = err.errno = 'ENOENT';
+    err.syscall = syscall + ' ' + command;
 
     return err;
 }</pre></li>
@@ -381,8 +374,8 @@
     </h2>
     <ul>
     <li>description and source-code<pre class="apidocCodePre">function verifyENOENT(status, parsed) {
-    if (isWin &#x26;&#x26; status === 1 &#x26;&#x26; !parsed.file) {
-        return notFoundError(parsed.original, &#x27;spawn&#x27;);
+    if (isWin &amp;&amp; status === 1 &amp;&amp; !parsed.file) {
+        return notFoundError(parsed.original, 'spawn');
     }
 
     return null;
@@ -400,17 +393,17 @@
     </h2>
     <ul>
     <li>description and source-code<pre class="apidocCodePre">function verifyENOENTSync(status, parsed) {
-    if (isWin &#x26;&#x26; status === 1 &#x26;&#x26; !parsed.file) {
-        return notFoundError(parsed.original, &#x27;spawnSync&#x27;);
+    if (isWin &amp;&amp; status === 1 &amp;&amp; !parsed.file) {
+        return notFoundError(parsed.original, 'spawnSync');
     }
 
     // If we are in node 10, then we are using spawn-sync; if it exited
     // with -1 it probably means that the command does not exist
-    if (isNode10 &#x26;&#x26; status === -1) {
+    if (isNode10 &amp;&amp; status === -1) {
         parsed.file = isWin ? parsed.file : resolveCommand(parsed.original);
 
         if (!parsed.file) {
-            return notFoundError(parsed.original, &#x27;spawnSync&#x27;);
+            return notFoundError(parsed.original, 'spawnSync');
         }
     }
 
@@ -432,7 +425,7 @@
     var parsed;
 
     // Normalize arguments, similar to nodejs
-    if (args &#x26;&#x26; !Array.isArray(args)) {
+    if (args &amp;&amp; !Array.isArray(args)) {
         options = args;
         args = null;
     }
@@ -474,7 +467,7 @@
     // Spawn the child process
     spawned = cp.spawn(parsed.command, parsed.args, parsed.options);
 
-    // Hook into child process &#x22;exit&#x22; event to emit an error if the command
+    // Hook into child process "exit" event to emit an error if the command
     // does not exists, see: https://github.com/IndigoUnited/node-cross-spawn/issues/16
     enoent.hookChildProcess(spawned, parsed);
 
@@ -490,7 +483,7 @@
     // Spawn the child process
     spawned = cp.<span class="apidocCodeKeywordSpan">spawn</span>(parsed.command, parsed.args, parsed.options);
 
-    // Hook into child process &#x22;exit&#x22; event to emit an error if the command
+    // Hook into child process "exit" event to emit an error if the command
     // does not exists, see: https://github.com/IndigoUnited/node-cross-spawn/issues/16
     enoent.hookChildProcess(spawned, parsed);
 
@@ -514,12 +507,12 @@
 
     if (!cpSpawnSync) {
         try {
-            cpSpawnSync = require(&#x27;spawn-sync&#x27;);  // eslint-disable-line global-require
+            cpSpawnSync = require('spawn-sync');  // eslint-disable-line global-require
         } catch (ex) {
             throw new Error(
-                &#x27;In order to use spawnSync on node 0.10 or older, you must &#x27; +
-                &#x27;install spawn-sync:\n\n&#x27; +
-                &#x27;  npm install spawn-sync --save&#x27;
+                'In order to use spawnSync on node 0.10 or older, you must ' +
+                'install spawn-sync:\n\n' +
+                '  npm install spawn-sync --save'
             );
         }
     }
@@ -537,15 +530,15 @@
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
 ```js
-var spawn = require(&#x27;cross-spawn&#x27;);
+var spawn = require('cross-spawn');
 
 // Spawn NPM asynchronously
-var child = spawn(&#x27;npm&#x27;, [&#x27;list&#x27;, &#x27;-g&#x27;, &#x27;-depth&#x27;, &#x27;0&#x27;], { stdio: &#x27;inherit
-&#x27; });
+var child = spawn('npm', ['list', '-g', '-depth', '0'], { stdio: 'inherit
+' });
 
 // Spawn NPM synchronously
-var results = spawn.<span class="apidocCodeKeywordSpan">sync</span>(&#x27;npm&#x27;, [&#x27;list&#x27;, &#x27;-g&#x27;, &#x27;-depth
-&#x27;, &#x27;0&#x27;], { stdio: &#x27;inherit&#x27; });
+var results = spawn.<span class="apidocCodeKeywordSpan">sync</span>('npm', ['list', '-g', '-depth
+', '0'], { stdio: 'inherit' });
 ```
 
 
@@ -597,14 +590,14 @@ var results = spawn.<span class="apidocCodeKeywordSpan">sync</span>(&#x27;npm&#x
     cp.emit = function (name, arg1) {
         var err;
 
-        // If emitting &#x22;exit&#x22; event and exit code is 1, we need to check if
-        // the command exists and emit an &#x22;error&#x22; instead
+        // If emitting "exit" event and exit code is 1, we need to check if
+        // the command exists and emit an "error" instead
         // See: https://github.com/IndigoUnited/node-cross-spawn/issues/16
-        if (name === &#x27;exit&#x27;) {
-            err = verifyENOENT(arg1, parsed, &#x27;spawn&#x27;);
+        if (name === 'exit') {
+            err = verifyENOENT(arg1, parsed, 'spawn');
 
             if (err) {
-                return originalEmit.call(cp, &#x27;error&#x27;, err);
+                return originalEmit.call(cp, 'error', err);
             }
         }
 
@@ -617,7 +610,7 @@ parsed = parse(command, args, options);
 // Spawn the child process
 spawned = cp.spawn(parsed.command, parsed.args, parsed.options);
 
-// Hook into child process &#x22;exit&#x22; event to emit an error if the command
+// Hook into child process "exit" event to emit an error if the command
 // does not exists, see: https://github.com/IndigoUnited/node-cross-spawn/issues/16
 enoent.<span class="apidocCodeKeywordSpan">hookChildProcess</span>(spawned, parsed);
 
@@ -642,9 +635,9 @@ var result;
     <li>description and source-code<pre class="apidocCodePre">function notFoundError(command, syscall) {
     var err;
 
-    err = new Error(syscall + &#x27; &#x27; + command + &#x27; ENOENT&#x27;);
-    err.code = err.errno = &#x27;ENOENT&#x27;;
-    err.syscall = syscall + &#x27; &#x27; + command;
+    err = new Error(syscall + ' ' + command + ' ENOENT');
+    err.code = err.errno = 'ENOENT';
+    err.syscall = syscall + ' ' + command;
 
     return err;
 }</pre></li>
@@ -661,8 +654,8 @@ var result;
     </h2>
     <ul>
     <li>description and source-code<pre class="apidocCodePre">function verifyENOENT(status, parsed) {
-    if (isWin &#x26;&#x26; status === 1 &#x26;&#x26; !parsed.file) {
-        return notFoundError(parsed.original, &#x27;spawn&#x27;);
+    if (isWin &amp;&amp; status === 1 &amp;&amp; !parsed.file) {
+        return notFoundError(parsed.original, 'spawn');
     }
 
     return null;
@@ -680,17 +673,17 @@ var result;
     </h2>
     <ul>
     <li>description and source-code<pre class="apidocCodePre">function verifyENOENTSync(status, parsed) {
-    if (isWin &#x26;&#x26; status === 1 &#x26;&#x26; !parsed.file) {
-        return notFoundError(parsed.original, &#x27;spawnSync&#x27;);
+    if (isWin &amp;&amp; status === 1 &amp;&amp; !parsed.file) {
+        return notFoundError(parsed.original, 'spawnSync');
     }
 
     // If we are in node 10, then we are using spawn-sync; if it exited
     // with -1 it probably means that the command does not exist
-    if (isNode10 &#x26;&#x26; status === -1) {
+    if (isNode10 &amp;&amp; status === -1) {
         parsed.file = isWin ? parsed.file : resolveCommand(parsed.original);
 
         if (!parsed.file) {
-            return notFoundError(parsed.original, &#x27;spawnSync&#x27;);
+            return notFoundError(parsed.original, 'spawnSync');
         }
     }
 
@@ -740,14 +733,14 @@ module.exports.sync = spawnSync;
     cp.emit = function (name, arg1) {
         var err;
 
-        // If emitting &#x22;exit&#x22; event and exit code is 1, we need to check if
-        // the command exists and emit an &#x22;error&#x22; instead
+        // If emitting "exit" event and exit code is 1, we need to check if
+        // the command exists and emit an "error" instead
         // See: https://github.com/IndigoUnited/node-cross-spawn/issues/16
-        if (name === &#x27;exit&#x27;) {
-            err = verifyENOENT(arg1, parsed, &#x27;spawn&#x27;);
+        if (name === 'exit') {
+            err = verifyENOENT(arg1, parsed, 'spawn');
 
             if (err) {
-                return originalEmit.call(cp, &#x27;error&#x27;, err);
+                return originalEmit.call(cp, 'error', err);
             }
         }
 
@@ -760,7 +753,7 @@ parsed = parse(command, args, options);
 // Spawn the child process
 spawned = cp.spawn(parsed.command, parsed.args, parsed.options);
 
-// Hook into child process &#x22;exit&#x22; event to emit an error if the command
+// Hook into child process "exit" event to emit an error if the command
 // does not exists, see: https://github.com/IndigoUnited/node-cross-spawn/issues/16
 enoent.<span class="apidocCodeKeywordSpan">hookChildProcess</span>(spawned, parsed);
 
@@ -790,9 +783,9 @@ var result;
     <li>description and source-code<pre class="apidocCodePre">function notFoundError(command, syscall) {
     var err;
 
-    err = new Error(syscall + &#x27; &#x27; + command + &#x27; ENOENT&#x27;);
-    err.code = err.errno = &#x27;ENOENT&#x27;;
-    err.syscall = syscall + &#x27; &#x27; + command;
+    err = new Error(syscall + ' ' + command + ' ENOENT');
+    err.code = err.errno = 'ENOENT';
+    err.syscall = syscall + ' ' + command;
 
     return err;
 }</pre></li>
@@ -814,8 +807,8 @@ var result;
     </h2>
     <ul>
     <li>description and source-code<pre class="apidocCodePre">function verifyENOENT(status, parsed) {
-    if (isWin &#x26;&#x26; status === 1 &#x26;&#x26; !parsed.file) {
-        return notFoundError(parsed.original, &#x27;spawn&#x27;);
+    if (isWin &amp;&amp; status === 1 &amp;&amp; !parsed.file) {
+        return notFoundError(parsed.original, 'spawn');
     }
 
     return null;
@@ -838,17 +831,17 @@ var result;
     </h2>
     <ul>
     <li>description and source-code<pre class="apidocCodePre">function verifyENOENTSync(status, parsed) {
-    if (isWin &#x26;&#x26; status === 1 &#x26;&#x26; !parsed.file) {
-        return notFoundError(parsed.original, &#x27;spawnSync&#x27;);
+    if (isWin &amp;&amp; status === 1 &amp;&amp; !parsed.file) {
+        return notFoundError(parsed.original, 'spawnSync');
     }
 
     // If we are in node 10, then we are using spawn-sync; if it exited
     // with -1 it probably means that the command does not exist
-    if (isNode10 &#x26;&#x26; status === -1) {
+    if (isNode10 &amp;&amp; status === -1) {
         parsed.file = isWin ? parsed.file : resolveCommand(parsed.original);
 
         if (!parsed.file) {
-            return notFoundError(parsed.original, &#x27;spawnSync&#x27;);
+            return notFoundError(parsed.original, 'spawnSync');
         }
     }
 
@@ -891,7 +884,7 @@ module.exports.sync = spawnSync;
     var parsed;
 
     // Normalize arguments, similar to nodejs
-    if (args &#x26;&#x26; !Array.isArray(args)) {
+    if (args &amp;&amp; !Array.isArray(args)) {
         options = args;
         args = null;
     }
@@ -934,12 +927,12 @@ module.exports.sync = spawnSync;
 
     if (!cpSpawnSync) {
         try {
-            cpSpawnSync = require(&#x27;spawn-sync&#x27;);  // eslint-disable-line global-require
+            cpSpawnSync = require('spawn-sync');  // eslint-disable-line global-require
         } catch (ex) {
             throw new Error(
-                &#x27;In order to use spawnSync on node 0.10 or older, you must &#x27; +
-                &#x27;install spawn-sync:\n\n&#x27; +
-                &#x27;  npm install spawn-sync --save&#x27;
+                'In order to use spawnSync on node 0.10 or older, you must ' +
+                'install spawn-sync:\n\n' +
+                '  npm install spawn-sync --save'
             );
         }
     }
@@ -957,15 +950,15 @@ module.exports.sync = spawnSync;
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
 ```js
-var spawn = require(&#x27;cross-spawn&#x27;);
+var spawn = require('cross-spawn');
 
 // Spawn NPM asynchronously
-var child = spawn(&#x27;npm&#x27;, [&#x27;list&#x27;, &#x27;-g&#x27;, &#x27;-depth&#x27;, &#x27;0&#x27;], { stdio: &#x27;inherit
-&#x27; });
+var child = spawn('npm', ['list', '-g', '-depth', '0'], { stdio: 'inherit
+' });
 
 // Spawn NPM synchronously
-var results = spawn.<span class="apidocCodeKeywordSpan">sync</span>(&#x27;npm&#x27;, [&#x27;list&#x27;, &#x27;-g&#x27;, &#x27;-depth
-&#x27;, &#x27;0&#x27;], { stdio: &#x27;inherit&#x27; });
+var results = spawn.<span class="apidocCodeKeywordSpan">sync</span>('npm', ['list', '-g', '-depth
+', '0'], { stdio: 'inherit' });
 ```
 
 
@@ -1002,3 +995,4 @@ var results = spawn.<span class="apidocCodeKeywordSpan">sync</span>(&#x27;npm&#x
     ]
 </div>
 </div>
+</body></html>
