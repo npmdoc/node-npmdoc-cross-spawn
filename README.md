@@ -1,6 +1,6 @@
 # npmdoc-cross-spawn
 
-#### api documentation for  [cross-spawn (v5.1.0)](https://github.com/IndigoUnited/node-cross-spawn#readme)  [![npm package](https://img.shields.io/npm/v/npmdoc-cross-spawn.svg?style=flat-square)](https://www.npmjs.org/package/npmdoc-cross-spawn) [![travis-ci.org build-status](https://api.travis-ci.org/npmdoc/node-npmdoc-cross-spawn.svg)](https://travis-ci.org/npmdoc/node-npmdoc-cross-spawn)
+#### basic api documentation for  [cross-spawn (v5.1.0)](https://github.com/IndigoUnited/node-cross-spawn#readme)  [![npm package](https://img.shields.io/npm/v/npmdoc-cross-spawn.svg?style=flat-square)](https://www.npmjs.org/package/npmdoc-cross-spawn) [![travis-ci.org build-status](https://api.travis-ci.org/npmdoc/node-npmdoc-cross-spawn.svg)](https://travis-ci.org/npmdoc/node-npmdoc-cross-spawn)
 
 #### Cross platform child_process#spawn and child_process#spawnSync
 
@@ -87,7 +87,8 @@
         "lint": "eslint '{*.js,lib/**/*.js,test/**/*.js}'",
         "test": "node test/prepare && mocha --bail test/test"
     },
-    "version": "5.1.0"
+    "version": "5.1.0",
+    "bin": {}
 }
 ```
 
